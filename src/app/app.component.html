@@ -1,0 +1,69 @@
+<div class="container">
+<!-- registration form section start -->
+<div class="form-section">
+  <h3><u> USER REGISTRATION</u></h3>
+  <form name="registration" #registrationForm="ngForm" (ngSubmit)="registerUser()">
+      <div class="form-feild">
+        <input type="text" name="name" class="form-control" placeholder="Enter Name *" #nameCtrl="ngModel" [(ngModel)]="username" required >
+        <small *ngIf="(nameCtrl.dirty || nameCtrl.touched) && nameCtrl.invalid || registrationForm.submitted">User name is madatory</small>
+      </div>
+
+      <div class="form-feild">
+        <input type="text" name="email" class="form-control" placeholder="Enter Email *" #emailctrl="ngModel" [(ngModel)]="email"  required email>
+        <small *ngIf="(emailctrl.dirty || emailctrl.touched) && emailctrl.invalid || registrationForm.submitted">Please enter valid email</small>
+      </div>
+
+      <div class="form-feild">
+        <input type="radio"   name="gender" [(ngModel)]="gender"  value="Male">
+          <label for="male">Male</label>
+          <input type="radio"  name="gender" [(ngModel)]="gender" value="Female">
+         <label for="female">Female</label>
+      </div>
+
+      <div class="form-feild">
+        <select name="status" placeholder="Select Status *"   [(ngModel)]="status" required >
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+        
+      </div>
+      <div class="form-feild">
+        <button type="submit">Register User</button>
+      </div>
+  </form>
+</div>
+
+<!-- grid details section start -->
+<div class="grid-section">
+  <div class="row">
+    <div class="col-md-4">
+      
+    </div>
+  </div>
+<h3><u>USER DETAILS</u></h3>
+  <table>
+   <tr>
+     <th>NAME</th>
+     <th>EMAIL</th>
+     <th>GENDER</th>
+     <th>STATUS</th>
+     <th>ACTION</th>
+   </tr>
+   <tr *ngFor="let item of res;">
+     <td>{{item.name}}</td>
+     <td>{{item.email}}</td>
+     <td>{{item.gender}}</td>
+     <td>{{item.status}}</td>
+     <td class="delete-user" (click)="deleteUser(item.id)">Delete</td>
+  </tr>
+ </table>
+</div>
+</div>
+
+
+<div class="success-message" *ngIf="registersuccess">
+  <span>User Register Successfuly...</span>
+</div>
+<div class="success-message" *ngIf="deletesuccess">
+  <span>User Successfuly Deleted...</span>
+</div>
